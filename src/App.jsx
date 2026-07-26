@@ -6,7 +6,8 @@ import { kvGet, kvSet } from "./storage.js";
 // Source of truth for who can log in. Edit these names and redeploy —
 // the app seeds them into Redis on first run. Passwords are NOT stored
 // here; each person sets their own on first login.
-const FIXED_USERNAMES = ["Akash", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"];
+const FIXED_USERNAMES = ["Akash", "Aju", "Kathir", "Shiva", "Sivaraj", "Jagath", "Dhanush", "Divyanand",
+                        "Monica", "Priya", "Preethi", "Sreenidhi", "Meera", "Surruthi", "Haarthy"];
 
 // ---------- Palette / tokens ----------
 const C = {

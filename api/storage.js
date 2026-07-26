@@ -1,4 +1,9 @@
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
+
+// Redis.fromEnv() reads UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN
+// (and falls back to the older KV_REST_API_URL / KV_REST_API_TOKEN names),
+// whichever the Upstash Vercel integration injected — no manual config.
+const redis = Redis.fromEnv();
 
 // Only these keys are readable/writable through this endpoint — keeps the
 // route from becoming an open key-value store for anything else.
@@ -12,13 +17,13 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const value = await kv.get(key);
+    const value = await redis.get(key);
     return res.status(200).json({ key, value: value ?? null });
   }
 
   if (req.method === "POST") {
     const { value } = req.body || {};
-    await kv.set(key, value);
+    await redis.set(key, value);
     return res.status(200).json({ ok: true });
   }
 
